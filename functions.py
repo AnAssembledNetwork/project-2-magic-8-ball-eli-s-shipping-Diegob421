@@ -1,61 +1,69 @@
-# """
-#  *****************************************************************************
-#    FILE:        functions.py
-#
-#    AUTHOR:      {Your Name Here}
-#
-#    ASSIGNMENT:  Magic 8 Ball fortune teller and Eli's Shipping
-#
-#    DATE:         {Today's Date}
-#
-#    DESCRIPTION: {Your Description Here}
-#
-#  *****************************************************************************
+#ground shipping.  flat charge of $20
+# weight of package      price per pound
+# 2 lbs or less          $1.50
+# over 2 lb but less than or equal to 6 lb $3
+# over 6 less that or equal to 10 $4      
+# over 10 lbs $4.75 
 
-# ELI's SHIPPING RATES
-# Ground Shipping
-# Weight of Package                         | Price per Pound   | Flat Charge
-# 2 lb or less                              |	$1.50           |	$20.00
-# Over 2 lb but less than or equal to 6 lb  |   $3.00           |	$20.00
-# Over 6 lb but less than or equal to 10 lb |   $4.00           |	$20.00
-# Over 10 lb                                |   $4.75           |	$20.00
+#ground shipping premium. no price per pound only a flat charge of 125
 
-# Ground Shipping Premium
-# Weight of Package                         | Price per Pound   | Flat Charge
-# 2 lb or less                              |	$0.00           |	$125.00
-# Over 2 lb but less than or equal to 6 lb  |   $0.00           |	$125.00
-# Over 6 lb but less than or equal to 10 lb |   $0.00           |	$125.00
-# Over 10 lb                                |   $0.00           |	$125.00
+#drone shipping
+# 2lb or less = 4.5 per pound
+# over 2 lb but less than or equal to 6 lb 9
+# over 6lb but less than or equal to 10lb 12
+# over 10 lb 14.25
 
-# Drone Shipping
-# Weight of Package                         | Price per Pound   | Flat Charge
-# 2 lb or less                              |	$4.50           |	$0.00
-# Over 2 lb but less than or equal to 6 lb  |   $9.00           |	$0.00
-# Over 6 lb but less than or equal to 10 lb |   $12.00          |	$0.00
-# Over 10 lb                                |   $14.25          |	$0.00
+from random import randrange
+def fortune(full_name, q_answered):
+
+  list = ["Yes - definitely.", "It is decidedly so.", "Without a doubt.", "Reply hazy, try again.", "Ask again later.", "Better not tell you now.", "My sources say no.", "Outlook not so good.", "Very doubtful"]
+  random_num = randrange(0,9)
+  fortune1 = list[random_num]
+  space = full_name.find(" ")
+  name = full_name[:space]
+  if name[-1] == "s":
+    print(f"{name}' Question: {q_answered} ")
+  else:
+    print(f"{name}'s Question: {q_answered} ")
+    print()
+  print(f"Magic 8-Ball's answer: {fortune1} ")
 
 
-# Make sure to add parameters
-def fortune():
-
-    # This ignores our code so that we do not get an error Remove 'pass' when you want to start testing code.
-    pass
-
-#  Make sure to add parameters
+  
 def shipping():
-
-    # This ignores our code so that we do not get an error Remove 'pass' when you want to start testing code.
-    pass
+  weight = float(input("What is your package weight in pounds? "))
+  if weight <= 2:
+    grnd = (weight*1.50+20)
+    grndpr = (125)
+    drone = (weight*4.5)
+  elif weight > 2 and weight <= 6:
+    grnd = (weight*3+20)
+    grndpr = (125)
+    drone = (weight*9)
+  elif weight > 6 and weight <= 10:
+    grnd = (weight*4+20)
+    grndpr = (125)
+    drone = (weight*12)
+  else:
+    grnd = (weight*4.75+20)
+    grndpr = (125)
+    drone = (weight*14.25)
+  print(f"The price of ground shipping is ${grnd:.2f}" ) 
+  print(f"The price of premium ground shipping is ${grndpr:.2f}" ) 
+  print(f"The price of drone shipping is ${drone:.2f}" ) 
+  if grnd < grndpr and grnd < drone:
+    print(f"To save the most money, you should choose ground shipping! ")
+  elif grndpr < grnd and grndpr < drone:
+    print(f"To save the most money, you should choose ground shipping premium! ")
+  elif drone < grnd and drone < grndpr:
+    print(f"To save the most money, you should choose drone shipping! ")
 
 
 def main():
-
-    # Collect user input in main and pass these values to the functions fortune and shipping. 
-    # This ignores our code so that we do not get an error Remove 'pass' when you want to start testing code.
-    pass
-
-##################DO NOT EDIT BELOW THIS LINE################
-# This invokes the main function.  It is always included in our
-# python programs. 
+  name = input("What is your full name? ")
+  qu = input("What is your question you like to answer? ")
+  fortune(name, qu)
+  shipping()
+  
 if __name__ == "__main__":
-    main()
+  main()
